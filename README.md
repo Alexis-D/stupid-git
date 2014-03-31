@@ -1,4 +1,4 @@
-# sg -- stupid git
+# `sg` -- stupid git
 
 Stupid git is a very simple "implementation" of git in Python. It's the result of me trying to understand how git actually works. It's actually quite clever as it relies on a few core 'principles': immutable objects (blobs, commits, trees, tags) and mutable references (`HEAD`s, branches, tags).
 
