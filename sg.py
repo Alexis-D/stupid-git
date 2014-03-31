@@ -110,10 +110,12 @@ def read_index():
         flags_start = sha1_start + hashlib.sha1().digest_size
         entry_path_start = flags_start + struct.calcsize(INDEX_FLAGS_FMT)
 
-        stat = struct.unpack(INDEX_BEFORE_SHA1_FMT, content[start_offset:sha1_start])
+        stat = struct.unpack(INDEX_BEFORE_SHA1_FMT,
+                             content[start_offset:sha1_start])
         sha1 = codecs.encode(content[sha1_start:flags_start],
                              'hex').decode('ascii')
-        flags = struct.unpack(INDEX_FLAGS_FMT, content[flags_start:entry_path_start])
+        flags = struct.unpack(INDEX_FLAGS_FMT,
+                              content[flags_start:entry_path_start])
         path = content[entry_path_start:content.find(b'\0', entry_path_start)]
 
         yield (path, sha1)
@@ -132,7 +134,8 @@ def write_index(index):
     # this function is highly wrong/inefficient, but that's also one of the
     # least interesting (w/ read_index)
     index_file = find_git_dir() / 'index'
-    content = struct.pack(INDEX_HEADER_FMT, b'D', b'I', b'R', b'C', 2, len(index))
+    content = struct.pack(INDEX_HEADER_FMT, b'D', b'I', b'R', b'C', 2,
+                          len(index))
 
     for path in sorted(index):
         stat = os.stat(path)
@@ -155,7 +158,8 @@ def write_index(index):
         entry = struct.pack(
             INDEX_BEFORE_SHA1_FMT,
             int(stat.st_ctime),
-            int((stat.st_ctime % 1) * 10 ** 6),  # nost_ctime_nsec on MacOS afaict
+            # nost_ctime_nsec on MacOS afaict
+            int((stat.st_ctime % 1) * 10 ** 6),
             int(stat.st_mtime),
             int((stat.st_mtime % 1) * 10 ** 6),
             stat.st_dev,
@@ -195,10 +199,12 @@ def commit_tree(parsed):
 
     tree = b'tree ' + parsed.tree.encode('ascii')
     # should read this from gitconfig but whatever
-    author = b'author stupid git <sg.py> ' + time.strftime('%s %z').encode('ascii')
+    author = b'author stupid git <sg.py> '\
+             + time.strftime('%s %z').encode('ascii')
     parent = b'\n'.join((b'parent ' + parent.encode('ascii') for parent in
                         parsed.parents))
-    committer = b'author stupid git <sg.py> ' + time.strftime('%s %z').encode('ascii')
+    committer = b'author stupid git <sg.py> '\
+                + time.strftime('%s %z').encode('ascii')
 
     if parent:
         commit = b'\n'.join([tree, parent, author, committer,
@@ -307,7 +313,6 @@ def write_tree(parsed):
 
 if __name__ == '__main__':
     import argparse
-    import sys
 
     commands = {
         'cat-file': cat_file,
