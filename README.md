@@ -10,25 +10,25 @@ It runs on Python `3.4+` w/o dependencies.
 
 ## Example
 
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test $ alias sg=../sg.py
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test $ sg init
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ echo a > a
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ echo b > b
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg hash-object -w a b
+     ✓ ~/sg/test $ alias sg=../sg.py
+     ✓ ~/sg/test $ sg init
+     ✓ ~/sg/test (master) $ echo a > a
+     ✓ ~/sg/test (master) $ echo b > b
+     ✓ ~/sg/test (master) $ sg hash-object -w a b
     78981922613b2afb6025042ff6bd878ac1994e85
     61780798228d17af2d34fce4cfbdf35556832472
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg update-index --add a
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg write-tree
+     ✓ ~/sg/test (master) $ sg update-index --add a
+     ✓ ~/sg/test (master) $ sg write-tree
     8e47fca129517ba3cd6a0650b462128386c8e7da
-     ✓ 21:56 adaboville @ adoboville-mbp in ~/sg/test (master) $ echo 'First commit w/o using git CLI!' | sg commit-tree 8e47fca129517ba3cd6a0650b462128386c8e7da
+     ✓ ~/sg/test (master) $ echo 'First commit w/o using git CLI!' | sg commit-tree 8e47fca129517ba3cd6a0650b462128386c8e7da
     4640cf89181aa094594dfa8ee4f079785d6213f4
-     ✓ 21:57 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg update-index --add b
-     ✓ 21:57 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg write-tree
+     ✓ ~/sg/test (master) $ sg update-index --add b
+     ✓ ~/sg/test (master) $ sg write-tree
     97a96a08809ff9c82950792c011f1eff23af1af0
-     ✓ 21:57 adaboville @ adoboville-mbp in ~/sg/test (master) $ echo 'Commit with a parent!' | sg commit-tree -p 4640cf89181aa094594dfa8ee4f079785d6213f4 97a96a08809ff9c82950792c011f1eff23af1af0
+     ✓ ~/sg/test (master) $ echo 'Commit with a parent!' | sg commit-tree -p 4640cf89181aa094594dfa8ee4f079785d6213f4 97a96a08809ff9c82950792c011f1eff23af1af0
     2715b676baaf5711a973aa3d0981bce7d491a3e7
-     ✓ 21:58 adaboville @ adoboville-mbp in ~/sg/test (master) $ sg update-ref HEAD 2715b676baaf5711a973aa3d0981bce7d491a3e7
-     ✓ 21:58 adaboville @ adoboville-mbp in ~/sg/test (master) $ git log --graph --format=oneline
+     ✓ ~/sg/test (master) $ sg update-ref HEAD 2715b676baaf5711a973aa3d0981bce7d491a3e7
+     ✓ ~/sg/test (master) $ git log --graph --format=oneline
     * 2715b676baaf5711a973aa3d0981bce7d491a3e7 Commit with a parent!
     * 4640cf89181aa094594dfa8ee4f079785d6213f4 First commit w/o using git CLI!
 
